@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Herramientas Educativas - Atria</title>
+   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+   <link rel="stylesheet" href="css/style.css">
+   <style>
+       .quiz-container { max-width: 600px; margin: 0 auto; }
+   </style>
+</head>
+<body>
+   <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+       <a class="navbar-brand" href="index.html">Atria</a>
+       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav">
+         <span class="navbar-toggler-icon"></span>
+       </button>
+       <div class="collapse navbar-collapse" id="navbarNav">
+           <ul class="navbar-nav ml-auto">
+               <li class="nav-item"><a class="nav-link" href="index.html">Inicio</a></li>
+               <li class="nav-item"><a class="nav-link" href="about.html">Sobre Nosotros</a></li>
+               <li class="nav-item"><a class="nav-link" href="education.html">Educación</a></li>
+               <li class="nav-item"><a class="nav-link" href="research.html">Investigación y Divulgación</a></li>
+               <li class="nav-item"><a class="nav-link" href="tourism.html">Turismo</a></li>
+               <li class="nav-item"><a class="nav-link" href="activities.html">Actividades</a></li>
+               <li class="nav-item active"><a class="nav-link" href="tools.html">Herramientas</a></li>
+               <li class="nav-item"><a class="nav-link" href="contact.html">Contacto</a></li>
+           </ul>
+       </div>
+   </nav>
+   <section class="container my-5">
+       <h1>Herramientas Educativas</h1>
+       <p>Responde el siguiente quiz sobre astronomía:</p>
+       <div class="quiz-container">
+           <div id="quiz">
+               <p id="question"></p>
+               <div id="choices" class="mb-3"></div>
+               <button id="next-btn" class="btn btn-primary">Siguiente</button>
+           </div>
+           <div id="result" style="display:none;">
+               <h3>Resultado</h3>
+               <p id="score"></p>
+               <button id="restart-btn" class="btn btn-secondary">Reiniciar Quiz</button>
+           </div>
+       </div>
+   </section>
+   <footer class="bg-dark text-white text-center py-3">
+       <p>&copy; 2025 Atria. Todos los derechos reservados.</p>
+       <p>Síguenos en Instagram: <a href="https://www.instagram.com/atriafans" target="_blank">@atriafans</a></p>
+   </footer>
+   <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+   <script>
+       const quizData = [
+           {
+               question: "¿Cuál es el planeta más cercano al Sol?",
+               choices: ["Mercurio", "Venus", "Tierra", "Marte"],
+               answer: "Mercurio"
+           },
+           {
+               question: "¿Qué galaxia es la más cercana a la Vía Láctea?",
+               choices: ["Andrómeda", "Triángulo", "Sombrero", "Cigarra"],
+               answer: "Andrómeda"
+           },
+           {
+               question: "¿Cuál es la estrella más brillante en el cielo nocturno?",
+               choices: ["Sirius", "Canopus", "Alpha Centauri", "Arcturus"],
+               answer: "Sirius"
+           }
+       ];
+       let currentQuestion = 0;
+       let score = 0;
+       const quizEl = $("#quiz");
+       const resultEl = $("#result");
+
+       function loadQuestion() {
+           const q = quizData[currentQuestion];
+           $("#question").text(q.question);
+           $("#choices").empty();
+           q.choices.forEach(choice => {
+               const btn = $("<button>")
+                           .addClass("btn btn-outline-primary btn-block mb-2 choice-btn")
+                           .text(choice)
+                           .click(function(){
+                               if(choice === q.answer) {
+                                   score++;
+                               }
+                               $(".choice-btn").prop("disabled", true);
+                           });
+               $("#choices").append(btn);
+           });
+       }
+
+       $("#next-btn").click(function(){
+           currentQuestion++;
+           if(currentQuestion < quizData.length) {
+               loadQuestion();
+           } else {
+               quizEl.hide();
+               $("#score").text("Tu puntaje es " + score + " de " + quizData.length);
+               resultEl.show();
+           }
+       });
+
+       $("#restart-btn").click(function(){
+           currentQuestion = 0;
+           score = 0;
+           resultEl.hide();
+           quizEl.show();
+           loadQuestion();
+       });
+
+       // Inicializa el quiz
+       loadQuestion();
+   </script>
+</body>
+</html>

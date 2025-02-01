@@ -1,0 +1,22 @@
+{
+  "activities": [
+    {
+      "title": "Olimpiada Argentina de Astronomía 2024",
+      "description": "Participación destacada en las Olimpiadas Argentinas de Astronomía.",
+      "date": "2024-05-10",
+      "image": "https://via.placeholder.com/350x200?text=Olimpiada+2024"
+    },
+    {
+      "title": "Excursión Nocturna",
+      "description": "Observación del cielo en el observatorio nacional.",
+      "date": "2024-07-20",
+      "image": "https://via.placeholder.com/350x200?text=Excursi%C3%B3n+Nocturna"
+    },
+    {
+      "title": "Charla de Divulgación Científica",
+      "description": "Charla sobre los últimos avances en astronomía.",
+      "date": "2024-09-15",
+      "image": "https://via.placeholder.com/350x200?text=Charla+Divulgaci%C3%B3n"
+    }
+  ]
+}
